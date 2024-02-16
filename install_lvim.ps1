@@ -5,18 +5,19 @@ function Install-LunarVim {
     pwsh -c "`$LV_BRANCH='$LV_BRANCH'; iwr $installerScriptUrl -UseBasicParsing | iex"
 }
 
-function Move-LvimConfig {
+function Copy-LvimConfig {
     $sourcePath = "lvim.lua"
     $destinationPath = "$env:LOCALAPPDATA\lvim\config.lua"
-    Move-Item -Path $sourcePath -Destination $destinationPath -Force
-    Write-Host "Moved lvim.lua to $destinationPath"
+    Copy-Item -Path $sourcePath -Destination $destinationPath -Force
+    Write-Host "Copied lvim.lua to $destinationPath"
 }
 
 # Install LunarVim
 Install-LunarVim
 
-# Move lvim.lua to the user's AppData/Local/lvim directory
-Move-LvimConfig
+# Copy lvim.lua to the user's AppData/Local/lvim directory
+Copy-LvimConfig
 
+# Install nerd fonts
 Write-Host "Install nerd fonts"
 oh-my-posh font install --user
