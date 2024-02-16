@@ -94,6 +94,9 @@ Copy-File -source "terminal.json" -destination $terminalConfigDestination
 $makeBinPath = "C:\Program Files (x86)\GnuWin32\bin"
 Add-ToPath $makeBinPath
 
+# Add zig to system path
+$zigBinPath = "$env:USERPROFILE\AppData\Local\Microsoft\WinGet\Packages\zig.zig_Microsoft.Winget.Source_8wekyb3d8bbwe\zig-windows-x86_64-0.11.0"
+Add-ToPath $zigBinPath
 
 # Install nerd fonts
 Write-Host "Install nerd fonts"
