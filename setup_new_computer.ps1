@@ -28,6 +28,14 @@ function Install-LunarVim {
     pwsh -c "`$LV_BRANCH='$LV_BRANCH'; iwr $installerScriptUrl -UseBasicParsing | iex"
 }
 
+# Function to set Windows theme to dark mode
+function Set-WindowsThemeDarkMode {
+    Write-Host "Setting Windows theme to dark mode"
+    reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize /v AppsUseLightTheme /t REG_DWORD /d 0 /f
+    reg add HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize /v SystemUsesLightTheme /t REG_DWORD /d 0 /f
+    Write-Host "Windows theme set to dark mode"
+}
+
 # List of programs to install
 $programs = @(
     "Mozilla.Firefox",
@@ -48,6 +56,9 @@ $programs = @(
     "OpenJS.NodeJS",
     "GoLang.Go"
 )
+
+# Set Windows theme to dark mode
+Set-WindowsThemeDarkMode
 
 # Install software
 foreach ($program in $programs) {
