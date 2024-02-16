@@ -85,7 +85,7 @@ Move-File -source "applications.yaml" -destination "$env:USERPROFILE\application
 Move-File -source "whkdrc" -destination "$env:USERPROFILE\.config\whkdrc"
 
 # Move terminal config to Windows Terminal directory
-$terminalConfigDestination = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\terminal.json"
+$terminalConfigDestination = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
 Move-File -source "terminal.json" -destination $terminalConfigDestination
 
 # Add GnuWin32.Make bin to system PATH
