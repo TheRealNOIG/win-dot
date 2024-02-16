@@ -80,7 +80,6 @@ foreach ($program in $programs) {
 }
 
 # Move configuration files
-Move-File -source "Microsoft.PowerShell_profile.ps1" -destination "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 Move-File -source "komorebi.json" -destination "$env:USERPROFILE\komorebi.json"
 Move-File -source "applications.yaml" -destination "$env:USERPROFILE\applications.yaml"
 Move-File -source "whkdrc" -destination "$env:USERPROFILE\.config\whkdrc"
