@@ -6,7 +6,7 @@ function Install-LunarVim {
 }
 
 function Move-LvimConfig {
-    $sourcePath = "$env:USERPROFILE\.config\lvim\lvim.lua"
+    $sourcePath = "lvim.lua"
     $destinationPath = "$env:LOCALAPPDATA\lvim\config.lua"
     Move-Item -Path $sourcePath -Destination $destinationPath -Force
     Write-Host "Moved lvim.lua to $destinationPath"
