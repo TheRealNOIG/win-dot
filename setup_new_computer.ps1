@@ -20,6 +20,14 @@ function Move-File {
     Move-Item -Path $source -Destination $destination -Force -ErrorAction SilentlyContinue
 }
 
+# Function to install LunarVim
+function Install-LunarVim {
+    Write-Host "Setting up LunarVim"
+    $LV_BRANCH='release-1.3/neovim-0.9'
+    $installerScriptUrl = "https://raw.githubusercontent.com/LunarVim/LunarVim/$LV_BRANCH/utils/installer/install.ps1"
+    pwsh -c "`$LV_BRANCH='$LV_BRANCH'; iwr $installerScriptUrl -UseBasicParsing | iex"
+}
+
 # List of programs to install
 $programs = @(
     "Mozilla.Firefox",
@@ -52,9 +60,19 @@ Move-File -source "komorebi.json" -destination "$env:USERPROFILE\komorebi.json"
 Move-File -source "applications.yaml" -destination "$env:USERPROFILE\applications.yaml"
 Move-File -source "whkdrc" -destination "$env:USERPROFILE\.config\whkdrc"
 
+# Move terminal config to Windows Terminal directory
+$terminalConfigDestination = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\terminal.json"
+Move-File -source "terminal.json" -destination $terminalConfigDestination
+
+# Add GnuWin32.Make bin to system PATH
+Add-To-Path "C:\Program Files (x86)\GnuWin32\bin"
+
+# Install LunarVim
+Install-LunarVim
+
+Write-Host "Installing fonts"
+oh-my-posh font install
+
 # Notify user of post-installation steps
 Write-Host "Installation complete."
-Write-Host "Please add 'C:\Program Files (x86)\GnuWin32\bin' to your system path."
-Write-Host "Run '~oh-my-posh font install~' in an admin terminal to set up your nerd font."
-Write-Host "Manually edit your terminal config with settings from terminal.json."
 Write-Host "Komerebi can be started with ~komorebic start --whkd~"
