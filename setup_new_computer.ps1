@@ -57,6 +57,7 @@ $programs = @(
     "Microsoft.PowerShell",
     "Microsoft.WindowsTerminal",
     "JanDeDobbeleer.OhMyPosh",
+    "BurntSushi.ripgrep.MSVC",
     "ajeetdsouza.zoxide",
     "junegunn.fzf",
     "Neovim.Neovim",
