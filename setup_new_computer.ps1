@@ -80,7 +80,7 @@ foreach ($program in $programs) {
 }
 
 # Copy configuration files
-Move-File -source "Microsoft.PowerShell_profile.ps1" -destination "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
+Copy-File -source "Microsoft.PowerShell_profile.ps1" -destination "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 Copy-File -source "komorebi.json" -destination "$env:USERPROFILE\komorebi.json"
 Copy-File -source "applications.yaml" -destination "$env:USERPROFILE\applications.yaml"
 Copy-File -source "whkdrc" -destination "$env:USERPROFILE\.config\whkdrc"
