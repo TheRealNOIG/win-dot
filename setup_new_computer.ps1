@@ -60,6 +60,7 @@ $programs = @(
     "BurntSushi.ripgrep.MSVC",
     "ajeetdsouza.zoxide",
     "junegunn.fzf",
+    "Clement.bottom",
     "Neovim.Neovim",
     "Microsoft.VisualStudioCode",
     "LGUG2Z.komorebi",
