@@ -80,6 +80,7 @@ foreach ($program in $programs) {
 }
 
 # Copy configuration files
+Move-File -source "Microsoft.PowerShell_profile.ps1" -destination "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 Copy-File -source "komorebi.json" -destination "$env:USERPROFILE\komorebi.json"
 Copy-File -source "applications.yaml" -destination "$env:USERPROFILE\applications.yaml"
 Copy-File -source "whkdrc" -destination "$env:USERPROFILE\.config\whkdrc"
@@ -91,6 +92,11 @@ Copy-File -source "terminal.json" -destination $terminalConfigDestination
 # Add GnuWin32.Make bin to system PATH
 $makeBinPath = "C:\Program Files (x86)\GnuWin32\bin"
 Add-ToPath $makeBinPath
+
+
+# Install nerd fonts
+Write-Host "Install nerd fonts"
+& "$env:USERPROFILE\AppData\Local\Programs\oh-my-posh\bin\oh-my-posh.exe" font install --user
 
 # Notify user of post-installation steps
 Write-Host "Installation complete."
