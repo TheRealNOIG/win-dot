@@ -36,6 +36,20 @@ function Set-WindowsThemeDarkMode {
     Write-Host "Windows theme set to dark mode"
 }
 
+# Function to add a directory to the system PATH
+function Add-ToPath {
+    param (
+        [string]$pathToAdd
+    )
+    $currentPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
+    if ($currentPath -notlike "*$pathToAdd*") {
+        [System.Environment]::SetEnvironmentVariable("Path", "$currentPath;$pathToAdd", "Machine")
+        Write-Host "Added $pathToAdd to system PATH"
+    } else {
+        Write-Host "$pathToAdd is already in system PATH"
+    }
+}
+
 # List of programs to install
 $programs = @(
     "Mozilla.Firefox",
@@ -76,15 +90,10 @@ $terminalConfigDestination = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.
 Move-File -source "terminal.json" -destination $terminalConfigDestination
 
 # Add GnuWin32.Make bin to system PATH
-Add-To-Path "C:\Program Files (x86)\GnuWin32\bin"
-
-# Install LunarVim
-Install-LunarVim
-
-Write-Host "Installing fonts"
-oh-my-posh font install
+$makeBinPath = "C:\Program Files (x86)\GnuWin32\bin"
+Add-ToPath $makeBinPath
 
 # Notify user of post-installation steps
 Write-Host "Installation complete."
 Write-Host "Komerebi can be started with ~komorebic start --whkd~"
-Write-Host "Open Terminal and run install_lvim.ps1 go finish setup"
+Write-Host "Open Terminal and run install_lvim.ps1 to finish setup"
