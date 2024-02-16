@@ -5,5 +5,15 @@ function Install-LunarVim {
     pwsh -c "`$LV_BRANCH='$LV_BRANCH'; iwr $installerScriptUrl -UseBasicParsing | iex"
 }
 
+function Move-LvimConfig {
+    $sourcePath = "$env:USERPROFILE\.config\lvim\lvim.lua"
+    $destinationPath = "$env:LOCALAPPDATA\lvim\config.lua"
+    Move-Item -Path $sourcePath -Destination $destinationPath -Force
+    Write-Host "Moved lvim.lua to $destinationPath"
+}
+
 # Install LunarVim
 Install-LunarVim
+
+# Move lvim.lua to the user's AppData/Local/lvim directory
+Move-LvimConfig
