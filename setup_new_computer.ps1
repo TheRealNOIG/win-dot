@@ -87,3 +87,4 @@ oh-my-posh font install
 # Notify user of post-installation steps
 Write-Host "Installation complete."
 Write-Host "Komerebi can be started with ~komorebic start --whkd~"
+Write-Host "Open Terminal and run install_lvim.ps1 go finish setup"
