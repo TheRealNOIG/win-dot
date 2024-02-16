@@ -17,3 +17,6 @@ Install-LunarVim
 
 # Move lvim.lua to the user's AppData/Local/lvim directory
 Move-LvimConfig
+
+Write-Host "Install nerd fonts"
+oh-my-posh font install
