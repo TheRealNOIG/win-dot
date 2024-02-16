@@ -19,4 +19,4 @@ Install-LunarVim
 Move-LvimConfig
 
 Write-Host "Install nerd fonts"
-oh-my-posh font install
+oh-my-posh font install --user
