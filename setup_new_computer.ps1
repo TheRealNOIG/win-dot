@@ -7,8 +7,8 @@ function Install-Software {
     winget install $appName -e
 }
 
-# Function to move files, creating directories if necessary and replacing existing files
-function Move-File {
+# Function to copy files, creating directories if necessary and replacing existing files
+function Copy-File {
     param (
         [string]$source,
         [string]$destination
@@ -17,7 +17,7 @@ function Move-File {
     if (-not (Test-Path $destinationDir)) {
         New-Item -ItemType Directory -Path $destinationDir -Force | Out-Null
     }
-    Move-Item -Path $source -Destination $destination -Force -ErrorAction SilentlyContinue
+    Copy-Item -Path $source -Destination $destination -Force -ErrorAction SilentlyContinue
 }
 
 # Function to install LunarVim
@@ -79,14 +79,14 @@ foreach ($program in $programs) {
     Install-Software $program
 }
 
-# Move configuration files
-Move-File -source "komorebi.json" -destination "$env:USERPROFILE\komorebi.json"
-Move-File -source "applications.yaml" -destination "$env:USERPROFILE\applications.yaml"
-Move-File -source "whkdrc" -destination "$env:USERPROFILE\.config\whkdrc"
+# Copy configuration files
+Copy-File -source "komorebi.json" -destination "$env:USERPROFILE\komorebi.json"
+Copy-File -source "applications.yaml" -destination "$env:USERPROFILE\applications.yaml"
+Copy-File -source "whkdrc" -destination "$env:USERPROFILE\.config\whkdrc"
 
-# Move terminal config to Windows Terminal directory
+# Copy terminal config to Windows Terminal directory
 $terminalConfigDestination = "$env:USERPROFILE\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-Move-File -source "terminal.json" -destination $terminalConfigDestination
+Copy-File -source "terminal.json" -destination $terminalConfigDestination
 
 # Add GnuWin32.Make bin to system PATH
 $makeBinPath = "C:\Program Files (x86)\GnuWin32\bin"
@@ -96,3 +96,4 @@ Add-ToPath $makeBinPath
 Write-Host "Installation complete."
 Write-Host "Komerebi can be started with ~komorebic start --whkd~"
 Write-Host "Open Terminal and run install_lvim.ps1 to finish setup"
+
