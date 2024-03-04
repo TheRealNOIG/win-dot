@@ -1,5 +1,8 @@
-
+-- Read the docs: https://www.lunarvim.org/docs/configuration
+-- Video Tutorials: https://www.youtube.com/watch?v=sFA9kX-Ud_c&list=PLhoH5vyxr6QqGu0i7tt_XoVK9v-KvZ3m6
+-- Forum: https://www.reddit.com/r/lunarvim/
 -- Discord: https://discord.com/invite/Xb9B4Ny
+
 
 lvim.colorscheme = "citruszest"
 vim.opt.relativenumber = true
@@ -26,13 +29,20 @@ vim.g.clipboard = {
   },
 }
 
-
 ------------------------
 -- Setup Plugins
 ------------------------
 lvim.plugins = {
   "olexsmir/gopher.nvim",
   "leoluz/nvim-dap-go",
+  {
+    "folke/todo-comments.nvim",
+    event = "BufRead",
+    config = function()
+      require("todo-comments").setup()
+    end,
+  },
+  "effkay/argonaut.vim",
   {
     "zootedb0t/citruszest.nvim",
     config = function()
@@ -84,6 +94,12 @@ lvim.plugins = {
         org_default_notes_file = '~/orgfiles/refile.org',
       })
     end,
+  },
+  {
+    'simrat39/rust-tools.nvim',
+    config = function ()
+      require("rust-tools").setup()
+    end
   }
 }
 
@@ -95,10 +111,15 @@ lvim.builtin.which_key.mappings["sp"] = {
   "<CMD>lua require'telescope'.extensions.project.project{}<CR>", "Search Projects"
 }
 
+lvim.builtin.which_key.mappings["lt"] = {
+  "<CMD>TodoTelescope<CR>", "Todo Telescope"
+}
+
 lvim.builtin.which_key.mappings['w'] = {
   name = "Window",
   h = { "<cmd>split<CR>", "Split Window Horizontally" },
   v = { "<cmd>vsplit<CR>", "Split Window Vertically" },
+  q = { "<cmd>close<CR>", "Close Current Window" },
   n = { "<C-w>h", "Move To Left Window" },
   i = { "<C-w>l", "Move To Right Window" },
   u = { "<C-w>k", "Move To Above Window" },
@@ -111,3 +132,9 @@ lvim.builtin.which_key.mappings['w'] = {
 lvim.builtin.telescope.on_config_done = function(telescope)
   pcall(telescope.load_extension, "telescope-project")
 end
+
+
+------------------------
+-- Disable core plugins
+------------------------
+-- lvim.builtin.bufferline.active = false
