@@ -7,15 +7,22 @@ Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
 <#
 Fuzzy search Settings
 #>
-iex "$(thefuck --alias)"
+Invoke-Expression "$(thefuck --alias)"
 Set-PsFzfOption -EnableAliasFuzzyEdit
 Set-PsFzfOption -EnableAliasFuzzySetLocation
 Set-PsFzfOption -EnableAliasFuzzyKillProcess
 Set-PsFzfOption -EnableAliasFuzzyHistory
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 
-function ChangeDirectoryWithFzf {
-    Get-ChildItem . -Recurse -Attributes Directory | Invoke-Fzf | Set-Location
+function FindAllDirectoriesWithFzf
+{
+  Get-ChildItem / -Recurse -Attributes Directory -ErrorAction SilentlyContinue | Invoke-Fzf | Set-Location
 }
-Set-Alias -Name cda -Value ChangeDirectoryWithFzf
+function ChangeDirectoryWithFzf
+{
+  Get-ChildItem . -Recurse -Attributes Directory -ErrorAction SilentlyContinue | Invoke-Fzf | Set-Location
+}
+
+Set-Alias -Name cda -Value FindAllDirectoriesWithFzf
+Set-Alias -Name cdf -Value ChangeDirectoryWithFzf
 
