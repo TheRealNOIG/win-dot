@@ -1,11 +1,16 @@
-oh-my-posh init pwsh --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/night-owl.omp.json' | Invoke-Expression
-
 # ---------------------------------------------------------------------------------------------------------
 # Aliases
 # ---------------------------------------------------------------------------------------------------------
 Set-Alias lvim 'C:\Users\tyler.gregorcyk\.local\bin\lvim.ps1'
 Set-Alias -Name lg -Value lazygit
 Invoke-Expression (& { (zoxide init --cmd cd powershell | Out-String) })
+
+# ---------------------------------------------------------------------------------------------------------
+# Fuzzy CD Aliases
+# ---------------------------------------------------------------------------------------------------------
+Set-Alias -Name cda -Value FindAllDirectoriesWithFzf
+Set-Alias -Name cdd -Value ChangeDirectoryWithFzf
+Set-Alias -Name cdu -Value FindAllUserDirectoryWithFzf
 
 # ---------------------------------------------------------------------------------------------------------
 # Fuzzy search Settings
@@ -18,12 +23,9 @@ Set-PsFzfOption -EnableAliasFuzzyHistory
 Set-PSReadLineKeyHandler -Key Tab -ScriptBlock { Invoke-FzfTabCompletion }
 
 # ---------------------------------------------------------------------------------------------------------
-# Fuzzy CD Aliases
+# oh-my-posh setup
 # ---------------------------------------------------------------------------------------------------------
-Set-Alias -Name cda -Value FindAllDirectoriesWithFzf
-Set-Alias -Name cdf -Value ChangeDirectoryWithFzf
-Set-Alias -Name cdu -Value FindAllUserDirectoryWithFzf
-
+oh-my-posh init pwsh --config 'https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/night-owl.omp.json' | Invoke-Expression
 
 # ---------------------------------------------------------------------------------------------------------
 # Functions
