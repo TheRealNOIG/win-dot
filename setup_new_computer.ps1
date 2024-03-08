@@ -81,6 +81,9 @@ foreach ($program in $programs) {
     Install-Software $program
 }
 
+# Install PW modules
+Install-Module -Name PSFzf
+
 # Copy configuration files
 Copy-File -source "Microsoft.PowerShell_profile.ps1" -destination "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
 Copy-File -source "komorebi.json" -destination "$env:USERPROFILE\komorebi.json"
